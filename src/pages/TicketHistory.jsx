@@ -29,7 +29,7 @@ export default function TicketHistory() {
       .catch(console.error)
   }, [team])
 
-  const priorityColors = ['bg-teal-900', 'bg-teal-700', 'bg-teal-500', 'bg-teal-300']
+  const priorityColors = ['bg-red-900', 'bg-orange-500', 'bg-yellow-600', 'bg-green-700', 'bg-green-300']
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
@@ -40,10 +40,13 @@ export default function TicketHistory() {
         return (
           <div
             key={ticket._id}
-            className="bg-white bg-opacity-80 shadow rounded-lg overflow-hidden border border-gray-200 mx-5"
+            className="bg-[#070f24] bg-opacity-80 shadow rounded-xl overflow-hidden border-[#0a1c2b] mx-5"
           >
-            <div className={`flex justify-between items-center px-3 py-2 ${priorityColor}`}>
-              <span className="text-sm text-white font-semibold">{ticket.subject}</span>
+            <div className={`flex justify-between items-center px-3 py-2`}>
+              <div className='flex'>
+                <div className={`text-lg text-white font-semibold rounded-md ${priorityColor} px-3`}>{ticket.priority}</div>
+                <span className="text-lg text-white font-semibold mx-4">{ticket.subject}</span>
+              </div>
               <button
                 onClick={() => setExpandedTicketId(isExpanded ? null : ticket._id)}
                 title="View details"
@@ -53,18 +56,18 @@ export default function TicketHistory() {
               </button>
             </div>
 
-            <div className="p-3 text-sm text-gray-700">
-              <p><span className="font-semibold">Priority:</span> {ticket.priority}</p>
-              {role === 'admin' && <p className="mt-2 whitespace-pre-line"><span className="font-semibold">Team:</span> {ticket.team}</p>}
-              <p className="mt-2 whitespace-pre-line"><span className="font-semibold">From:</span> {ticket.sender}</p>
-              <p className="mt-2 whitespace-pre-line"><span className="font-semibold">Summary:</span> {ticket.summary}</p>
-              <p className="mt-2 whitespace-pre-line"><span className="font-semibold">Status:</span> {ticket.status}</p>
-              <p className="mt-2 whitespace-pre-line"><span className="font-semibold">Created:</span> {new Date(ticket.createdAt).toLocaleString()}</p>
-              <p className="mt-2 whitespace-pre-line"><span className="font-semibold">Updated:</span> {new Date(ticket.updatedAt).toLocaleString()}</p>
+            <div className="p-3 text-sm text-white">
+              {/* <p><span className="font-semibold">Priority:</span> {ticket.priority}</p> */}
+              {role === 'admin' && <p className="mt-2 whitespace-pre-line"><span className="font-semibold text-teal-300 text-md">Team:</span> {ticket.team}</p>}
+              <p className="whitespace-pre-line"><span className="font-semibold text-teal-300 text-md">From:</span> {ticket.sender}</p>
+              <p className="mt-2 whitespace-pre-line"><span className="font-semibold text-teal-300 text-md">Summary:</span> {ticket.summary}</p>
+              <p className="mt-2 whitespace-pre-line"><span className="font-semibold text-teal-300 text-md">Status:</span> {ticket.status}</p>
+              <p className="mt-2 whitespace-pre-line"><span className="font-semibold text-teal-300 text-md">Created:</span> {new Date(ticket.createdAt).toLocaleString()}</p>
+              <p className="mt-2 whitespace-pre-line"><span className="font-semibold text-teal-300 text-md">Updated:</span> {new Date(ticket.updatedAt).toLocaleString()}</p>
               {isExpanded && (
                 <>
-                  <p className="mt-2 whitespace-pre-line"><span className="font-semibold">Body:</span> {ticket.body}</p>
-                  <p className="mt-2 whitespace-pre-line"><span className="font-semibold">Reply:</span> {ticket.reply}</p>
+                  <p className="mt-2 whitespace-pre-line"><span className="font-semibold text-teal-300 text-md">Body:</span> {ticket.body}</p>
+                  <p className="mt-2 whitespace-pre-line"><span className="font-semibold text-teal-300 text-md">Reply:</span> {ticket.reply}</p>
                 </>
               )}
             </div>

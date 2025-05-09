@@ -1,9 +1,10 @@
-import { useParams, NavLink, Outlet, useNavigate } from 'react-router-dom'
+import { useParams, Outlet, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import TicketDashboard from './TicketDashboard'
 import TicketHistory from './TicketHistory'
-import { useState } from 'react'
 import AnalyticsPage from './AnalyticsPage'
+import { useState } from 'react'
+import { Menu, X } from 'lucide-react' // use `npm install lucide-react`
 
 export default function TeamPage() {
   const { role: paramRole } = useParams()
@@ -11,6 +12,7 @@ export default function TeamPage() {
   const { setUser } = useAuth()
   const navigate = useNavigate()
   const [activeTab, setActiveTab] = useState('dashboard')
+  const [isOpen, setIsOpen] = useState(false)
 
   const roleMap = {
     admin: 'Admin',
@@ -19,12 +21,12 @@ export default function TeamPage() {
     sales: 'Sales',
     hr: 'HR',
     it: 'IT'
-  };
-  
-  const team1 = roleMap[role.toLowerCase()];
+  }
 
-  const tabClass = tab =>
-        `${activeTab === tab ? 'text-teal-600 font-semibold' : 'text-gray-600 hover:bg-gray-200'}`
+  const team1 = roleMap[role.toLowerCase()]
+
+  const tabClass = (tab) =>
+    `${activeTab === tab ? 'text-teal-400 font-semibold' : 'text-gray-100 hover:text-[#00bfda]'} block px-3 py-2`
 
   const handleLogout = () => {
     localStorage.removeItem('token')
@@ -33,48 +35,40 @@ export default function TeamPage() {
   }
 
   return (
-    <div className="min-h-screen bg-cover"
-    style={{ backgroundImage: "url('https://img.freepik.com/free-vector/abstract-blue-light-pipe-speed-zoom-black-background-technology_1142-9980.jpg?semt=ais_hybrid&w=740')" }}>
+    <div
+      className="min-h-screen bg-cover bg-center flex flex-col"
+      style={{
+        backgroundColor: '#000614'
+      }}
+    >
       {/* Header */}
-      <header className="bg-white shadow-md p-4 flex justify-between items-center">
-        <h1 className="text-xl font-bold text-teal-700">Tixio - {team1}</h1>
+      <header className="bg-[#070f24] shadow-md p-4 flex flex-wrap justify-between items-center">
+        <div className="flex items-center space-x-3">
+          <img src="/tixio-2.png" alt="Tixio Logo" className="h-10" />
+          <h1 className="text-sm font-bold text-teal-500">{team1}</h1>
+        </div>
 
-        <nav className="flex items-center gap-6">
-          {/* <NavLink
-            to={`/${role}/dashboard`}
-            className={({ isActive }) =>
-              isActive ? 'text-teal-600 font-semibold' : 'text-gray-600'
-            }
-          >
+        {/* Hamburger Button (Mobile only) */}
+        <button className="text-white md:hidden" onClick={() => setIsOpen(!isOpen)}>
+          {isOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+
+        {/* Navigation */}
+        <nav className={`w-full md:w-auto md:flex md:items-center gap-4 ${isOpen ? 'block' : 'hidden'}`}>
+          <button className={tabClass('dashboard')} onClick={() => setActiveTab('dashboard')}>
             Ticket Dashboard
-          </NavLink>
-          <NavLink
-            to={`/${role}/history`}
-            className={({ isActive }) =>
-              isActive ? 'text-teal-600 font-semibold' : 'text-gray-600'
-            }
-          >
+          </button>
+          <button className={tabClass('history')} onClick={() => setActiveTab('history')}>
             Ticket History
-          </NavLink>
-
+          </button>
           {role === 'admin' && (
-            <NavLink
-              to="/admin/analytics"
-              className={({ isActive }) =>
-                isActive ? 'text-teal-600 font-semibold' : 'text-gray-600'
-              }
-            >
+            <button className={tabClass('analytics')} onClick={() => setActiveTab('analytics')}>
               Analytics
-            </NavLink>
-          )} */}
-
-        <button className={tabClass('dashboard')} onClick={() => setActiveTab('dashboard')}>Ticket Dashboard</button>
-         <button className={tabClass('history')} onClick={() => setActiveTab('history')}>Ticket History</button>
-         {role==='admin' && <button className={tabClass('analytics')} onClick={() => setActiveTab('analytics')}>Analytics</button>}
-
+            </button>
+          )}
           <button
             onClick={handleLogout}
-            className="ml-4 bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition"
+            className="mt-2 md:mt-0 bg-[#00bfda] text-white px-3 py-1 rounded hover:bg-[#044a73] transition"
           >
             Logout
           </button>
@@ -83,8 +77,14 @@ export default function TeamPage() {
 
       {/* Content area */}
       <div className="mt-4">
-         {activeTab === 'dashboard' ? <TicketDashboard embedded /> : activeTab=== 'history'? <TicketHistory embedded />: <AnalyticsPage embedded />}
-     </div>
+        {activeTab === 'dashboard' ? (
+          <TicketDashboard embedded />
+        ) : activeTab === 'history' ? (
+          <TicketHistory embedded />
+        ) : (
+          <AnalyticsPage embedded />
+        )}
+      </div>
       <main className="p-6">
         <Outlet />
       </main>

@@ -50,7 +50,7 @@ export default function TicketDashboard() {
     closeTicket(id)
   }
 
-  const priorityColors = ['bg-teal-900', 'bg-teal-700', 'bg-teal-500', 'bg-teal-300']
+  const priorityColors = ['bg-red-900', 'bg-orange-500', 'bg-yellow-600', 'bg-green-700', 'bg-green-300']
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
@@ -61,10 +61,13 @@ export default function TicketDashboard() {
         return (
           <div
             key={ticket._id}
-            className="bg-white bg-opacity-80 shadow rounded-lg overflow-hidden border border-gray-200 mx-5"
+            className="bg-[#070f24] bg-opacity-80 shadow rounded-xl overflow-hidden border-[#0a1c2b] mx-5 "
           >
-            <div className={`flex justify-between items-center px-3 py-2 ${priorityColor}`}>
-              <span className="text-sm text-white font-semibold">{ticket.subject}</span>
+            <div className={`flex justify-between items-center px-3 py-2`}>
+              <div className='flex'>
+              <div className={`text-lg text-white font-semibold rounded-md ${priorityColor} px-3`}>{ticket.priority}</div>
+              <span className="text-lg text-white font-semibold mx-4">{ticket.subject}</span>
+              </div>
               <div className="space-x-2">
                 <button
                   onClick={() => setExpandedTicketId(isExpanded ? null : ticket._id)}
@@ -90,17 +93,17 @@ export default function TicketDashboard() {
               </div>
             </div>
 
-            <div className="p-3 text-sm text-gray-700">
-              <p><span className="font-semibold">Priority:</span> {ticket.priority}</p>
+            <div className="p-3 text-sm text-white m-2">
+              {/* <p><span className="font-semibold">Priority:</span> {ticket.priority}</p> */}
               {role === 'admin' && (
-                <p className="mt-2 whitespace-pre-line"><span className="font-semibold">Team:</span> {ticket.team}</p>
+                <p className="whitespace-pre-line"><span className="font-semibold text-teal-300 text-md">Team:</span> {ticket.team}</p>
               )}
-              <p className="mt-2 whitespace-pre-line"><span className="font-semibold">From:</span> {ticket.sender}</p>
-              <p className="mt-2 whitespace-pre-line"><span className="font-semibold">Date:</span> {new Date(ticket.createdAt).toLocaleString()}</p>
-              <p className="mt-2 whitespace-pre-line"><span className="font-semibold">Summary:</span> {ticket.summary}</p>
+              <p className="mt-2 whitespace-pre-line"><span className="font-semibold text-teal-300 text-md">From:</span> {ticket.sender}</p>
+              <p className="mt-2 whitespace-pre-line"><span className="font-semibold text-teal-300 text-md">Date:</span> {new Date(ticket.createdAt).toLocaleString()}</p>
+              <p className="mt-2 whitespace-pre-line"><span className="font-semibold text-teal-300 text-md">Summary:</span> {ticket.summary}</p>
               {isExpanded && (
                 <>
-                  <p className="mt-2 whitespace-pre-line"><span className="font-semibold">Body:</span> {ticket.body}</p>
+                  <p className="mt-2 whitespace-pre-line"><span className="font-semibold text-teal-300 text-md">Body:</span> {ticket.body}</p>
                   {ticket.status === 'open' && (
                     <div className="mt-3">
                       <textarea
@@ -111,7 +114,7 @@ export default function TicketDashboard() {
                       />
                       <button
                         onClick={() => sendReply(ticket._id, replyText[ticket._id])}
-                        className="bg-teal-600 text-white px-3 py-1 rounded hover:bg-teal-700"
+                        className="bg-[#00bfda] text-white px-3 py-1 rounded hover:bg-[#044a73]"
                       >
                         Send Reply & Close Ticket
                       </button>
@@ -119,7 +122,7 @@ export default function TicketDashboard() {
                   )}
                   {ticket.status !== 'open' && ticket.reply && (
                     <p className="mt-3 whitespace-pre-line">
-                      <span className="font-semibold">Reply:</span> {ticket.reply}
+                      <span className="font-semibold text-teal-300 text-md">Reply:</span> {ticket.reply}
                     </p>
                   )}
                 </>
