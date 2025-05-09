@@ -12,6 +12,17 @@ export default function TeamPage() {
   const navigate = useNavigate()
   const [activeTab, setActiveTab] = useState('dashboard')
 
+  const roleMap = {
+    admin: 'Admin',
+    billing: 'Billing',
+    tech: 'Tech Support',
+    sales: 'Sales',
+    hr: 'HR',
+    it: 'IT'
+  };
+  
+  const team1 = roleMap[role.toLowerCase()];
+
   const tabClass = tab =>
         `${activeTab === tab ? 'text-teal-600 font-semibold' : 'text-gray-600 hover:bg-gray-200'}`
 
@@ -26,7 +37,7 @@ export default function TeamPage() {
     style={{ backgroundImage: "url('https://img.freepik.com/free-vector/abstract-blue-light-pipe-speed-zoom-black-background-technology_1142-9980.jpg?semt=ais_hybrid&w=740')" }}>
       {/* Header */}
       <header className="bg-white shadow-md p-4 flex justify-between items-center">
-        <h1 className="text-xl font-bold text-teal-700">MailMorph - {role.charAt(0).toUpperCase()+role.slice(1)}</h1>
+        <h1 className="text-xl font-bold text-teal-700">Tixio - {team1}</h1>
 
         <nav className="flex items-center gap-6">
           {/* <NavLink

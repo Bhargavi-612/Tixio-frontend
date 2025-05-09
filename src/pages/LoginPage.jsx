@@ -40,7 +40,7 @@ export default function LoginPage() {
     >
       {/* Header */}
       <header className="w-full px-8 py-4 bg-white bg-opacity-80 shadow-md">
-        <h1 className="text-2xl font-bold text-teal-700">MailMorph</h1>
+        <h1 className="text-2xl font-bold text-teal-700">Tixio</h1>
       </header>
 
       {/* Login Form */}
@@ -83,8 +83,8 @@ export default function LoginPage() {
       <section className="mt-20 px-8 text-center text-white bg-black bg-opacity-50 py-8">
         <h3 className="text-xl font-semibold mb-2">About Us</h3>
         <p className="max-w-2xl mx-auto">
-        MailMorph is a smart email-based ticketing platform designed to simplify your internal support workflow. 
-          With AI-powered parsing and real-time dashboards for each team, MailMorph helps you stay on top of every request.
+        Tixio is a smart email-based ticketing platform designed to simplify your internal support workflow. 
+          With AI-powered parsing and real-time dashboards for each team, Tixio helps you stay on top of every request.
         </p>
       </section>
     </div>

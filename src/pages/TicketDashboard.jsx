@@ -4,7 +4,19 @@ import { useParams } from 'react-router-dom'
 export default function TicketDashboard() {
   const { role: team } = useParams()
   const role = team || 'admin'
-  const team1 = role.charAt(0).toUpperCase() + role.slice(1)
+  // const team1 = role.charAt(0).toUpperCase() + role.slice(1)
+
+  const roleMap = {
+    admin: 'Admin',
+    billing: 'Billing',
+    tech: 'Tech Support',
+    sales: 'Sales',
+    hr: 'HR',
+    it: 'IT'
+  };
+  
+  const team1 = roleMap[role.toLowerCase()];
+
   const [tickets, setTickets] = useState([])
   const [expandedTicketId, setExpandedTicketId] = useState(null)
   const [replyText, setReplyText] = useState({}) // map ticketId -> reply string
