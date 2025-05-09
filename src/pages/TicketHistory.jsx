@@ -52,6 +52,7 @@ export default function TicketHistory() {
               {isExpanded && (
                 <>
                   <p className="mt-2 whitespace-pre-line"><span className="font-semibold">Body:</span> {ticket.body}</p>
+                  <p className="mt-2 whitespace-pre-line"><span className="font-semibold">Reply:</span> {ticket.reply}</p>
                 </>
               )}
             </div>
