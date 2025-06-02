@@ -42,11 +42,17 @@ export default function LoginPage() {
       }}
     >
       {/* Header */}
-      <header className="w-full px-8 py-4 bg-[#070f24] bg-opacity-80 shadow-md">
+      <header className="w-full px-8 py-4 bg-[#070f24] bg-opacity-80 shadow-md flex items-center justify-between">
         <div className="flex items-center space-x-3">
           <img src="/tixio-2.png" alt="Tixio Logo" className="h-10" />
           {/* <h1 className="text-3xl font-bold text-[#101728]">Tixio</h1> */}
         </div>
+        <button
+          onClick={() => navigate('/faq')}
+          className="text-sm text-white border border-[#00bfda] px-4 py-1 rounded hover:bg-[#044a73] transition"
+        >
+          FAQ
+        </button>
       </header>
 
       {/* Login Form */}

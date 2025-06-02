@@ -107,7 +107,7 @@ export default function TicketDashboard() {
                   {ticket.status === 'open' && (
                     <div className="mt-3">
                       <textarea
-                        className="w-full p-2 border rounded mb-2 text-sm"
+                        className="w-full p-2 border rounded mb-2 text-sm text-black"
                         placeholder="Type your reply..."
                         value={replyText[ticket._id] || ''}
                         onChange={e => setReplyText(prev => ({ ...prev, [ticket._id]: e.target.value }))}

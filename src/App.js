@@ -5,6 +5,7 @@ import TeamPage from './pages/TeamPage'
 import TicketDashboard from './pages/TicketDashboard'
 import TicketHistory from './pages/TicketHistory'
 import AnalyticsPage from './pages/AnalyticsPage'
+import FaqPage from './pages/FAQPage'
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           {/* <Route path="dashboard" element={<TicketDashboard />} /> */}
           {/* <Route path="history" element={<TicketHistory />} /> */}
           {/* <Route path="/admin/analytics" element={<AnalyticsPage />} /> */}
+          <Route path="/faq" element={<FaqPage />}/>
       </Routes>
     </Router>
   )
